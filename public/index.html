@@ -552,13 +552,13 @@
                             </div>
 
                             <div class="actions">
-                                <button class="btn btn-primary" @click="changeIp(inst.id)">换 IPv4</button>
-                                <button class="btn btn-primary" style="background:linear-gradient(160deg, #6c5ce7 0%, #a855f7 100%); box-shadow:0 9px 20px rgba(108,92,231,0.35);" x-show="inst.ipv6" @click="changeIpv6(inst.id)">换 IPv6</button>
-                                <button class="btn btn-secondary" style="background:linear-gradient(160deg, #00b894 0%, #00cec9 100%); color:#fff; border:none; box-shadow:0 9px 20px rgba(0,184,148,0.3);" x-show="!inst.ipv6" @click="enableIpv6(inst.id)">附加 IPv6</button>
+                                <button class="btn btn-primary" style="padding:10px 14px; font-size:13px;" @click="changeIp(inst.id)">换 IPv4</button>
+                                <button class="btn btn-primary" style="background:linear-gradient(160deg, #6c5ce7 0%, #a855f7 100%); box-shadow:0 9px 20px rgba(108,92,231,0.35); padding:10px 14px; font-size:13px;" x-show="inst.ipv6" @click="changeIpv6(inst.id)">换 IPv6</button>
+                                <button class="btn btn-primary" style="background:linear-gradient(160deg, #6c5ce7 0%, #a855f7 100%); box-shadow:0 9px 20px rgba(108,92,231,0.35); padding:10px 14px; font-size:13px;" x-show="!inst.ipv6" @click="enableIpv6(inst.id)">加 IPv6</button>
                                 <button
                                     class="btn btn-secondary"
                                     type="button"
-                                    style="cursor:pointer;"
+                                    style="cursor:pointer; padding:10px 14px; font-size:13px;"
                                     @click.stop="refreshOneInstance(inst.id)"
                                     x-text="refreshingMap[inst.id] ? '刷新中...' : '刷新'">
                                 </button>
@@ -567,14 +567,14 @@
                                 <button
                                     :class="scheduleMap[inst.id]?.enabled ? 'btn btn-primary' : 'btn btn-secondary'"
                                     type="button"
-                                    style="cursor:pointer; padding:8px 10px; font-size:12px;"
+                                    style="cursor:pointer; padding:10px 14px; font-size:13px;"
                                     @click.stop="configureMonthlySchedule(inst)">
                                     定时换IP
                                 </button>
                                 <button
                                     class="btn btn-secondary"
                                     type="button"
-                                    style="cursor:pointer; padding:8px 10px; font-size:12px;"
+                                    style="cursor:pointer; padding:10px 14px; font-size:13px;"
                                     @click.stop="queryTraffic(inst.id)"
                                     x-text="trafficLoading[inst.id] ? '查询中...' : '本月流量'">
                                 </button>

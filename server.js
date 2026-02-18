@@ -60,7 +60,7 @@ function logAccess(action, detail, ip) {
 }
 
 function getClientIp(req) {
-    return req.headers['x-real-ip'] || req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.ip;
+    return req.headers['cf-connecting-ip'] || req.headers['x-real-ip'] || req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.ip;
 }
 
 app.use(express.json());
