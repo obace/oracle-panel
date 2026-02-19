@@ -18,7 +18,7 @@
 ## 一键部署
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/yuanzhangdck/oracle-panel/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/obace/oracle-panel/main/install.sh)
 ```
 
 ## 部署后
