@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO_OWNER="yuanzhangdck"
+REPO_OWNER="obace"
 REPO_NAME="oracle-panel"
 BRANCH="main"
 INSTALL_DIR="${INSTALL_DIR:-/opt/oracle-panel}"
