@@ -305,6 +305,31 @@ class OracleClient {
             }
         }
 
+        // Step 5: Add IPv6 route rule (::/0 -> Internet Gateway) to route table
+        const rtId = subnetUpdated.subnet.routeTableId;
+        if (rtId) {
+            const rt = await this.networkClient.getRouteTable({ rtId });
+            const rules = rt.routeTable.routeRules || [];
+            const hasIpv6Route = rules.some(r => r.destination === '::/0');
+            if (!hasIpv6Route) {
+                // Find Internet Gateway in the VCN
+                const igws = await this.networkClient.listInternetGateways({ compartmentId, vcnId });
+                const igw = (igws.items || [])[0];
+                if (igw) {
+                    rules.push({
+                        destination: '::/0',
+                        destinationType: 'CIDR_BLOCK',
+                        networkEntityId: igw.id,
+                        description: 'IPv6 default route via IGW'
+                    });
+                    await this.networkClient.updateRouteTable({
+                        rtId,
+                        updateRouteTableDetails: { routeRules: rules }
+                    });
+                }
+            }
+        }
+
         return newIpv6;
     }
 
