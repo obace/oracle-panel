@@ -387,12 +387,14 @@ app.post('/api/login', (req, res) => {
     const ip = getClientIp(req);
     if (!password || !verifyPanelPassword(password)) {
         logAccess('login_failed', '密码错误', ip);
+        sendTelegram(`[Oracle Panel] ⚠️ 登录失败\nIP: ${ip}\n时间: ${new Date().toLocaleString('zh-CN', {timeZone:'Asia/Shanghai'})}\n原因: 密码错误`);
         return res.status(401).json({ ok: false, error: '密码错误' });
     }
     const token = createSessionToken();
     sessions.set(token, Date.now() + SESSION_TTL_MS);
     res.setHeader('Set-Cookie', `${SESSION_COOKIE}=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${Math.floor(SESSION_TTL_MS / 1000)}`);
     logAccess('login', '登录成功', ip);
+    sendTelegram(`[Oracle Panel] ✅ 登录成功\nIP: ${ip}\n时间: ${new Date().toLocaleString('zh-CN', {timeZone:'Asia/Shanghai'})}`);
     res.json({ ok: true });
 });
 
